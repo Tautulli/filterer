@@ -7,6 +7,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
+  "homepage": "https://wcomartin.github.io/filterer/build/",
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
