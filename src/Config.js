@@ -6,12 +6,12 @@ const Config = {
     {
       "name": "Title",
       "type": "string",
-      "value": "{title}"
+      "value": "title"
     },
     {
       "name": "Year",
       "type": "number",
-      "value": "{year}"
+      "value": "year"
     }
   ],
 
@@ -47,6 +47,11 @@ const Config = {
       name: "less than",
       types: ["number"]
     },
+  ],
+
+  conditions: [
+    {coefficient: "year", operator: "is", value: ""},
+    {coefficient: "title", operator: "begins with", value: ""}
   ]
 
 }

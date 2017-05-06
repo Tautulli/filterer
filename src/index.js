@@ -6,10 +6,10 @@ import jQuery from 'jquery';
 import Config from './Config';
 
 (($) => {
-  $.fn.filterer = function(){
+  $.fn.filterer = function(config){
     this.each(function(){
       ReactDOM.render(
-        <App config={Config} />,
+        <App config={config} />,
         this
       );
     });
@@ -21,4 +21,4 @@ import Config from './Config';
 
 
 
-jQuery('#root').filterer();
+jQuery('#root').filterer(Config);
