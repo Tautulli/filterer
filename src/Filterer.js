@@ -63,7 +63,7 @@ class Filterer extends Component {
             <FilterLineLabel index={index}
                              addCondition={this.addCondition}
                              removeCondition={this.removeCondition}/>
-            <FilterLine coefficients={this.props.config.coefficients}
+            <FilterLine coefficients={this.props.config.parameters}
                         operators={this.props.config.operators}
                         condition={item}
                         index={index}
