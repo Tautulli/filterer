@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import jQuery from 'jquery';
 
+import Config from './Config';
+
 (($) => {
   $.fn.filterer = function(){
     this.each(function(){
       ReactDOM.render(
-        <App />,
+        <App config={Config} />,
         this
       );
     });
