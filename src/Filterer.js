@@ -4,7 +4,7 @@ import './App.css';
 import FilterLine from './FilterLine';
 import FilterLineLabel from './FilterLineLabel';
 
-class App extends Component {
+class Filterer extends Component {
 
   render() {
 
@@ -26,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Filterer;
