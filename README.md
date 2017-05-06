@@ -4,11 +4,6 @@ This project was created for use in PlexPy, to create a dynamic list of conditio
 
 built using React, wrapped with jquery... 
 
-## Features
-
-- bootstrap
-- limit operators by type
-
 ## Preview
 
 ![Preview](http://i.imgur.com/0AdMapj.jpg)
