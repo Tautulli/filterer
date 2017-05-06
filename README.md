@@ -10,6 +10,10 @@ built using React, wrapped with jquery...
 
 ## Usage
 
+copy `dist/filterer.jquery.js` to your js directory.
+
+`<script src="js/filterer.jquery.js"></script>`
+
 ```javascript
 config = {
   parameters: [
