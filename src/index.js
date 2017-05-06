@@ -1,62 +1,66 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Filterer from './Filterer';
-import jQuery from 'jquery';
+const $ = window.$;
 
-import Config from './Config';
+$.fn.filterer = function(config){
 
-(($) => {
-  $.fn.filterer = function(config){
+  config.operators = [
+    {
+      name: "contains",
+      types: ["string"]
+    },{
+      name: "does not contain",
+      types: ["string"]
+    },
+    {
+      name: "is",
+      types: ["string", 'number']
+    },
+    {
+      name: "is not",
+      types: ["string", 'number']
+    },
+    {
+      name: "begins with",
+      types: ["string"]
+    },
+    {
+      name: "ends with",
+      types: ["string"]
+    },
+    {
+      name: "greater than",
+      types: ["number"]
+    },
+    {
+      name: "less than",
+      types: ["number"]
+    },
+  ];
 
-    config.operators = [
-      {
-        name: "contains",
-        types: ["string"]
-      },{
-        name: "does not contain",
-        types: ["string"]
-      },
-      {
-        name: "is",
-        types: ["string", 'number']
-      },
-      {
-        name: "is not",
-        types: ["string", 'number']
-      },
-      {
-        name: "begins with",
-        types: ["string"]
-      },
-      {
-        name: "ends with",
-        types: ["string"]
-      },
-      {
-        name: "greater than",
-        types: ["number"]
-      },
-      {
-        name: "less than",
-        types: ["number"]
-      },
-    ];
+  this.each(function(){
+    ReactDOM.render(
+      <Filterer config={config} />,
+      this
+    );
+  });
+}
 
-    this.each(function(){
-      ReactDOM.render(
-        <Filterer config={config} />,
-        this
-      );
-    });
-  }
-})(jQuery);
+if(window.wcomartin_filterer_demo){
+  const Config = {
+    coefficients: [
+      {"name": "Title", "type": "string", "value": "title"},
+      {"name": "Year", "type": "number", "value": "year"}
+    ],
+    conditions: [
+      {coefficient: "year", operator: "is", value: ""},
+      {coefficient: "title", operator: "begins with", value: ""}
+    ]
+  };
+  Config.updateConditions = function(conditions) {
+    console.log(conditions);
+  };
+  $('#root').filterer(Config);
+}
 
-
-Config.updateConditions = function(conditions) {
-  console.log(conditions);
-};
-
-
-
-
-jQuery('#root').filterer(Config);

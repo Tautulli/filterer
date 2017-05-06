@@ -64,6 +64,7 @@ class Filterer extends Component {
                              addCondition={this.addCondition}
                              removeCondition={this.removeCondition}/>
             <FilterLine coefficients={this.props.config.coefficients}
+                        operators={this.props.config.operators}
                         condition={item}
                         index={index}
                         onChange={this.updateCondition}/>

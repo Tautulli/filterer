@@ -22,10 +22,10 @@ class FilterLineLabel extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-10">
+        <div className="col-sm-10">
           <label className="control-label">Condition &#123;{this.props.index + 1}&#125;</label>
         </div>
-        <div className="col-md-2">
+        <div className="col-sm-2">
           <a className="pull-right" style={addRemoveStyles} onClick={this.removeCondition}>
             <span className="fa fa-lg fa-minus-circle"/>
           </a>

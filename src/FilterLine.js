@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import Config from './Config';
-
 class FilterLine extends Component {
 
   constructor(props) {
@@ -18,7 +16,6 @@ class FilterLine extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, prevState)
     if (prevState !== this.state) {
       this.props.onChange({
         index: this.props.index,
@@ -28,6 +25,7 @@ class FilterLine extends Component {
   }
 
   getOperators(list, coefficient) {
+    console.log(list, coefficient);
     if (!list || !coefficient) return;
     return list.filter((item) => {
       return item.types.indexOf(coefficient.type) > -1;
@@ -46,7 +44,7 @@ class FilterLine extends Component {
   render() {
     return (
       <div className="form-group">
-        <div className="col-md-4">
+        <div className="col-sm-4">
           <select className="form-control input-sm"
                   name="coefficient"
                   value={this.state.coefficient}
@@ -54,15 +52,15 @@ class FilterLine extends Component {
             {this.getCoefficients(this.props.coefficients)}
           </select>
         </div>
-        <div className="col-md-3">
+        <div className="col-sm-3">
           <select className="form-control input-sm"
                   name="operator"
                   value={this.state.operator}
                   onChange={this.handleInputChange}>
-            {this.getOperators(Config.operators, this.props.coefficients.find((item) => item.value === this.state.coefficient))}
+            {this.getOperators(this.props.operators, this.props.coefficients.find((item) => item.value === this.state.coefficient))}
           </select>
         </div>
-        <div className="col-md-5">
+        <div className="col-sm-5">
           <input type="text"
                  name="value"
                  className="form-control input-sm"
