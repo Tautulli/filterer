@@ -14,8 +14,12 @@ import Config from './Config';
       );
     });
   }
-})(jQuery)
+})(jQuery);
 
+
+Config.updateConditions = function(conditions) {
+  console.log(conditions);
+};
 
 
 
