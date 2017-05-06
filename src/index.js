@@ -49,7 +49,7 @@ $.fn.filterer = function(config){
 
 if(window.wcomartin_filterer_demo){
   const Config = {
-    paramaters: [
+    parameters: [
       {"name": "Title", "type": "string", "value": "title"},
       {"name": "Year", "type": "number", "value": "year"}
     ],
