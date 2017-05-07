@@ -35,10 +35,11 @@ class FilterLine extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
-      <div className="form-group">
-        <div className="col-sm-4">
-          <select className="form-control input-sm"
+      <div className={this.props.classes.filterLineRow}>
+        <div className={this.props.classes.filterLineParameter}>
+          <select className={this.props.classes.filterLineInput}
                   name="coefficient"
                   value={this.props.condition.coefficient}
                   onChange={this.handleInputChange}>
@@ -46,8 +47,8 @@ class FilterLine extends Component {
             {this.getCoefficients(this.props.coefficients)}
           </select>
         </div>
-        <div className="col-sm-3">
-          <select className="form-control input-sm"
+        <div className={this.props.classes.filterLineOperator}>
+          <select className={this.props.classes.filterLineInput}
                   name="operator"
                   value={this.props.condition.operator}
                   onChange={this.handleInputChange}>
@@ -55,10 +56,10 @@ class FilterLine extends Component {
             {this.getOperators(this.props.operators, this.props.coefficients.find((item) => item.value === this.props.condition.coefficient))}
           </select>
         </div>
-        <div className="col-sm-5">
+        <div className={this.props.classes.filterLineValue}>
           <input type="text"
                  name="value"
-                 className="form-control input-sm"
+                 className={this.props.classes.filterLineInput}
                  value={this.props.condition.value}
                  onChange={this.handleInputChange}/>
         </div>

@@ -21,17 +21,18 @@ class FilterLineLabel extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-10">
-          <label className="control-label">Condition &#123;{this.props.index + 1}&#125;</label>
+      <div className={this.props.classes.filterLineLabelRow}>
+        <div className={this.props.classes.filterLineLabelCondition}>
+          <h5 style={{marginTop: 0}}>Condition &#123;{this.props.index + 1}&#125;</h5>
         </div>
-        <div className="col-sm-2">
-          <a className="pull-right" style={addRemoveStyles} onClick={this.removeCondition}>
-            <span className="fa fa-lg fa-minus-circle"/>
+        <div className={this.props.classes.filterLineLabelControls}>
+          <a style={addRemoveStyles} onClick={this.addCondition}>
+            <span className={this.props.classes.plusIcon}/>
           </a>
-          <a className="pull-right" style={addRemoveStyles} onClick={this.addCondition}>
-            <span className="fa fa-lg fa-plus-circle"/>
+          <a style={addRemoveStyles} onClick={this.removeCondition}>
+            <span className={this.props.classes.minusIcon}/>
           </a>
+
         </div>
       </div>
     );

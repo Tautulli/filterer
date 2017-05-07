@@ -53,15 +53,18 @@ class Filterer extends Component {
   }
 
   render() {
+    console.log(this.props.config.classes);
     let conditions = this.state.conditions.map((item, index) => {
       return (<div key={index}>
         <FilterLineLabel index={index}
+                         classes={this.props.config.classes}
                          addCondition={this.addCondition}
                          removeCondition={this.removeCondition}/>
         <FilterLine coefficients={this.props.config.parameters}
                     operators={this.props.config.operators}
                     condition={item}
                     index={index}
+                    classes={this.props.config.classes}
                     onChange={this.updateCondition}/>
       </div>)
     })
