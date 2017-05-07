@@ -27,7 +27,6 @@ class Filterer extends Component {
   }
 
   addCondition(index) {
-    console.log(index);
     let arr = this.state.conditions;
     arr.splice(index + 1, 0, {coefficient: "", operator: "", value: ""});
 
@@ -37,7 +36,6 @@ class Filterer extends Component {
   }
 
   removeCondition(index) {
-    console.log(index);
     if(this.state.conditions.length > 1) {
       let arr = this.state.conditions;
       arr.splice(index, 1);
@@ -55,26 +53,20 @@ class Filterer extends Component {
   }
 
   render() {
-    let renderConditions = (conditions) => {
-      if (!conditions) return;
-      return conditions.map((item, index) => {
-        return (
-          <div key={index}>
-            <FilterLineLabel index={index}
-                             addCondition={this.addCondition}
-                             removeCondition={this.removeCondition}/>
-            <FilterLine coefficients={this.props.config.parameters}
-                        operators={this.props.config.operators}
-                        condition={item}
-                        index={index}
-                        onChange={this.updateCondition}/>
-          </div>
-        );
-      })
-    }
-
+    let conditions = this.state.conditions.map((item, index) => {
+      return (<div key={index}>
+        <FilterLineLabel index={index}
+                         addCondition={this.addCondition}
+                         removeCondition={this.removeCondition}/>
+        <FilterLine coefficients={this.props.config.parameters}
+                    operators={this.props.config.operators}
+                    condition={item}
+                    index={index}
+                    onChange={this.updateCondition}/>
+      </div>)
+    })
     return (
-      <div className="form-horizontal">{renderConditions(this.state.conditions)}</div>
+      <div className="form-horizontal">{conditions}</div>
     );
   }
 }

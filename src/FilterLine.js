@@ -4,28 +4,21 @@ class FilterLine extends Component {
 
   constructor(props) {
     super(props);
-    this.state = props.condition;
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
+    let condition = this.props.condition;
+    condition[event.target.name] = event.target.value
+
+    this.props.onChange({
+      index: this.props.index,
+      value: condition
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState !== this.state) {
-      this.props.onChange({
-        index: this.props.index,
-        value: this.state
-      });
-    }
-  }
-
   getOperators(list, coefficient) {
-    console.log(list, coefficient);
     if (!list || !coefficient) return;
     return list.filter((item) => {
       return item.types.indexOf(coefficient.type) > -1;
@@ -47,24 +40,26 @@ class FilterLine extends Component {
         <div className="col-sm-4">
           <select className="form-control input-sm"
                   name="coefficient"
-                  value={this.state.coefficient}
+                  value={this.props.condition.coefficient}
                   onChange={this.handleInputChange}>
+            <option disabled selected value="">Parameter</option>
             {this.getCoefficients(this.props.coefficients)}
           </select>
         </div>
         <div className="col-sm-3">
           <select className="form-control input-sm"
                   name="operator"
-                  value={this.state.operator}
+                  value={this.props.condition.operator}
                   onChange={this.handleInputChange}>
-            {this.getOperators(this.props.operators, this.props.coefficients.find((item) => item.value === this.state.coefficient))}
+            <option disabled selected value="">Operator</option>
+            {this.getOperators(this.props.operators, this.props.coefficients.find((item) => item.value === this.props.condition.coefficient))}
           </select>
         </div>
         <div className="col-sm-5">
           <input type="text"
                  name="value"
                  className="form-control input-sm"
-                 value={this.state.value}
+                 value={this.props.condition.value}
                  onChange={this.handleInputChange}/>
         </div>
       </div>
