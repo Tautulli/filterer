@@ -9,8 +9,8 @@ class FilterLine extends Component {
   }
 
   handleInputChange(event) {
-    let condition = this.props.condition;
-    condition[event.target.name] = event.target.value
+    let condition = {...this.props.condition};
+    condition[event.target.name] = event.target.value;
 
     this.props.onChange({
       index: this.props.index,

@@ -8,7 +8,7 @@ class Filterer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      conditions: props.config.conditions
+      conditions: {...props.config.conditions}
     };
 
     this.updateCondition = this.updateCondition.bind(this);
@@ -18,7 +18,7 @@ class Filterer extends Component {
   }
 
   updateCondition(event) {
-    let arr = this.state.conditions;
+    let arr = {...this.state.conditions};
     arr[event.index] = event.value;
 
     this.setState({
@@ -27,7 +27,7 @@ class Filterer extends Component {
   }
 
   addCondition(index) {
-    let arr = this.state.conditions;
+    let arr = {...this.state.conditions};
     arr.splice(index + 1, 0, {coefficient: "", operator: "", value: ""});
 
     this.setState({
@@ -37,7 +37,7 @@ class Filterer extends Component {
 
   removeCondition(index) {
     if(this.state.conditions.length > 1) {
-      let arr = this.state.conditions;
+      let arr = {...this.state.conditions};
       arr.splice(index, 1);
 
       this.setState({
@@ -53,7 +53,6 @@ class Filterer extends Component {
   }
 
   render() {
-    console.log(this.props.config.classes);
     let conditions = this.state.conditions.map((item, index) => {
       return (<div key={index}>
         <FilterLineLabel index={index}
@@ -67,7 +66,7 @@ class Filterer extends Component {
                     classes={this.props.config.classes}
                     onChange={this.updateCondition}/>
       </div>)
-    })
+    });
     return (
       <div className="form-horizontal">{conditions}</div>
     );

@@ -39,7 +39,7 @@ $.fn.filterer = function(config){
     },
   ];
 
-  config.classes = Object.assign({}, config.classes, {
+  config.classes = {...{
     plusIcon: 'fa fa-plus',
     minusIcon: 'fa fa-minus',
     filterLineRow: 'form-group',
@@ -50,7 +50,7 @@ $.fn.filterer = function(config){
     filterLineLabelRow: 'row',
     filterLineLabelCondition: 'col-sm-10',
     filterLineLabelControls: 'col-sm-2 text-right',
-  });
+  }, ...config.classes};
 
 
   console.log(config);
@@ -60,7 +60,7 @@ $.fn.filterer = function(config){
       this
     );
   });
-}
+};
 
 if(window.wcomartin_filterer_demo){
   const Config = {
