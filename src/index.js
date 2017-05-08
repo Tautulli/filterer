@@ -8,34 +8,34 @@ $.fn.filterer = function(config){
   config.operators = [
     {
       name: "contains",
-      types: ["string"]
+      types: ["string", "str"]
     },{
       name: "does not contain",
-      types: ["string"]
+      types: ["string", "str"]
     },
     {
       name: "is",
-      types: ["string", 'number']
+      types: ["string", "str", 'number', 'int', 'float']
     },
     {
       name: "is not",
-      types: ["string", 'number']
+      types: ["string", "str", 'number', 'int', 'float']
     },
     {
       name: "begins with",
-      types: ["string"]
+      types: ["string", "str"]
     },
     {
       name: "ends with",
-      types: ["string"]
+      types: ["string", "str"]
     },
     {
       name: "greater than",
-      types: ["number"]
+      types: ["number", 'int', 'float']
     },
     {
       name: "less than",
-      types: ["number"]
+      types: ["number", 'int', 'float']
     },
   ];
 
@@ -69,8 +69,8 @@ if(window.wcomartin_filterer_demo){
       {"name": "Year", "type": "number", "value": "year"}
     ],
     conditions: [
-      {coefficient: "year", operator: "is", value: ""},
-      {coefficient: "title", operator: "begins with", value: ""}
+      {parameter: "year", operator: "is", value: ""},
+      {parameter: "title", operator: "begins with", value: ""}
     ]
   };
   Config.updateConditions = function(conditions) {

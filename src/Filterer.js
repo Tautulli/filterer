@@ -7,8 +7,9 @@ class Filterer extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      conditions: {...props.config.conditions}
+      conditions: props.config.conditions
     };
 
     this.updateCondition = this.updateCondition.bind(this);
@@ -18,7 +19,7 @@ class Filterer extends Component {
   }
 
   updateCondition(event) {
-    let arr = {...this.state.conditions};
+    let arr = this.state.conditions;
     arr[event.index] = event.value;
 
     this.setState({
@@ -27,8 +28,8 @@ class Filterer extends Component {
   }
 
   addCondition(index) {
-    let arr = {...this.state.conditions};
-    arr.splice(index + 1, 0, {coefficient: "", operator: "", value: ""});
+    let arr = this.state.conditions;
+    arr.splice(index + 1, 0, {parameter: "", operator: "", value: ""});
 
     this.setState({
       conditions: arr
@@ -37,7 +38,7 @@ class Filterer extends Component {
 
   removeCondition(index) {
     if(this.state.conditions.length > 1) {
-      let arr = {...this.state.conditions};
+      let arr = this.state.conditions;
       arr.splice(index, 1);
 
       this.setState({
@@ -59,7 +60,7 @@ class Filterer extends Component {
                          classes={this.props.config.classes}
                          addCondition={this.addCondition}
                          removeCondition={this.removeCondition}/>
-        <FilterLine coefficients={this.props.config.parameters}
+        <FilterLine parameters={this.props.config.parameters}
                     operators={this.props.config.operators}
                     condition={item}
                     index={index}

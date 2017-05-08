@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import {MultiSelect} from 'react-selectize';
+
 class FilterLine extends Component {
 
   constructor(props) {
@@ -9,7 +11,7 @@ class FilterLine extends Component {
   }
 
   handleInputChange(event) {
-    let condition = {...this.props.condition};
+    let condition = this.props.condition;
     condition[event.target.name] = event.target.value;
 
     this.props.onChange({
@@ -18,10 +20,20 @@ class FilterLine extends Component {
     });
   }
 
-  getOperators(list, coefficient) {
-    if (!list || !coefficient) return;
+  handleValueChange(value) {
+    let condition = this.props.condition;
+    condition.value = value;
+
+    this.props.onChange({
+      index: this.props.index,
+      value: condition
+    });
+  }
+
+  getOperators(list, parameter) {
+    if (!list || !parameter) return;
     return list.filter((item) => {
-      return item.types.indexOf(coefficient.type) > -1;
+      return item.types.indexOf(parameter.type) > -1;
     }).map((item, index) => {
       return (<option key={index} value={item.name}>{item.name}</option>)
     })
@@ -36,15 +48,16 @@ class FilterLine extends Component {
 
   render() {
     console.log(this.props);
+    let labels = []
     return (
       <div className={this.props.classes.filterLineRow}>
         <div className={this.props.classes.filterLineParameter}>
           <select className={this.props.classes.filterLineInput}
-                  name="coefficient"
-                  value={this.props.condition.coefficient}
+                  name="parameter"
+                  value={this.props.condition.parameter}
                   onChange={this.handleInputChange}>
-            <option disabled selected value="">Parameter</option>
-            {this.getCoefficients(this.props.coefficients)}
+            <option value="">-- Parameter --</option>
+            {this.getCoefficients(this.props.parameters)}
           </select>
         </div>
         <div className={this.props.classes.filterLineOperator}>
@@ -52,16 +65,22 @@ class FilterLine extends Component {
                   name="operator"
                   value={this.props.condition.operator}
                   onChange={this.handleInputChange}>
-            <option disabled selected value="">Operator</option>
-            {this.getOperators(this.props.operators, this.props.coefficients.find((item) => item.value === this.props.condition.coefficient))}
+            <option disabled selected value="">-- Operator --</option>
+            {this.getOperators(this.props.operators, this.props.parameters.find((item) => item.value === this.props.condition.parameter))}
           </select>
         </div>
         <div className={this.props.classes.filterLineValue}>
-          <input type="text"
-                 name="value"
-                 className={this.props.classes.filterLineInput}
-                 value={this.props.condition.value}
-                 onChange={this.handleInputChange}/>
+          <MultiSelect style={{width: "100%"}}
+                       placeholder="-- Value --"
+                       theme="bootstrap3"
+                       value={this.props.condition.value}
+                       onValuesChange={this.handleValueChange}
+                       createFromSearch={(options, values, search) => {
+                         labels = values.map((value) => { return value.label; })
+                         if (search.trim().length === 0 || labels.indexOf(search.trim()) !== -1)
+                           return null;
+                         return {label: search.trim(), value: search.trim()};
+                       }}/>
         </div>
       </div>
     );
