@@ -8,6 +8,7 @@ class FilterLine extends Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleValueChange = this.handleValueChange.bind(this);
   }
 
   handleInputChange(event) {
@@ -22,7 +23,7 @@ class FilterLine extends Component {
 
   handleValueChange(value) {
     let condition = this.props.condition;
-    condition.value = value;
+    condition.value = value.map(item => item.value);
 
     this.props.onChange({
       index: this.props.index,
@@ -46,9 +47,15 @@ class FilterLine extends Component {
     })
   };
 
+  getValues(values) {
+    if (!values) return [];
+    return values.map((item) => {
+      return {label: item, value: item}
+    })
+  };
+
+  labels = []
   render() {
-    console.log(this.props);
-    let labels = []
     return (
       <div className={this.props.classes.filterLineRow}>
         <div className={this.props.classes.filterLineParameter}>
@@ -65,7 +72,7 @@ class FilterLine extends Component {
                   name="operator"
                   value={this.props.condition.operator}
                   onChange={this.handleInputChange}>
-            <option disabled selected value="">-- Operator --</option>
+            <option disabled value="">-- Operator --</option>
             {this.getOperators(this.props.operators, this.props.parameters.find((item) => item.value === this.props.condition.parameter))}
           </select>
         </div>
@@ -73,11 +80,12 @@ class FilterLine extends Component {
           <MultiSelect style={{width: "100%"}}
                        placeholder="-- Value --"
                        theme="bootstrap3"
-                       value={this.props.condition.value}
+                       values={this.getValues(this.props.condition.value)}
                        onValuesChange={this.handleValueChange}
+                       uid={item => item.value}
                        createFromSearch={(options, values, search) => {
-                         labels = values.map((value) => { return value.label; })
-                         if (search.trim().length === 0 || labels.indexOf(search.trim()) !== -1)
+                         this.labels = values.map(value => value.label);
+                         if (search.trim().length === 0 || this.labels.indexOf(search.trim()) !== -1)
                            return null;
                          return {label: search.trim(), value: search.trim()};
                        }}/>

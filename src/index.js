@@ -51,9 +51,7 @@ $.fn.filterer = function(config){
     filterLineLabelCondition: 'col-sm-10',
     filterLineLabelControls: 'col-sm-2 text-right',
   }, ...config.classes};
-
-
-  console.log(config);
+  
   this.each(function(){
     ReactDOM.render(
       <Filterer id="filterer" config={config} />,
@@ -69,8 +67,8 @@ if(window.wcomartin_filterer_demo){
       {"name": "Year", "type": "number", "value": "year"}
     ],
     conditions: [
-      {parameter: "year", operator: "is", value: ""},
-      {parameter: "title", operator: "begins with", value: ""}
+      {parameter: "year", operator: "is", value: [2017]},
+      // {parameter: "title", operator: "begins with", value: ["Westworld"]}
     ]
   };
   Config.updateConditions = function(conditions) {
