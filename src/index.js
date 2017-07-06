@@ -30,11 +30,11 @@ $.fn.filterer = function(config){
       types: ["string", "str"]
     },
     {
-      name: "greater than",
+      name: "is greater than",
       types: ["number", 'int', 'float']
     },
     {
-      name: "less than",
+      name: "is less than",
       types: ["number", 'int', 'float']
     },
   ];
@@ -72,7 +72,7 @@ if(window.wcomartin_filterer_demo){
     ]
   };
   Config.updateConditions = function(conditions) {
-    console.log(conditions);
+    console.log(JSON.stringify(conditions));
   };
   $('#root').filterer(Config);
 }

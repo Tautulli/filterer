@@ -14,6 +14,10 @@ class FilterLine extends Component {
   handleInputChange(event) {
     let condition = this.props.condition;
     condition[event.target.name] = event.target.value;
+    let selectedParameter = this.props.parameters.find(item => item.value === event.target.value);
+    if(selectedParameter) {
+      condition.type = selectedParameter.type;
+    }
 
     this.props.onChange({
       index: this.props.index,
@@ -56,6 +60,8 @@ class FilterLine extends Component {
 
   labels = []
   render() {
+    let param = this.props.parameters.find(item => item.value === this.props.condition.parameter);
+    this.props.condition.type = (param ? param.type: null);
     return (
       <div className={this.props.classes.filterLineRow}>
         <div className={this.props.classes.filterLineParameter}>
@@ -83,11 +89,22 @@ class FilterLine extends Component {
                        values={this.getValues(this.props.condition.value)}
                        onValuesChange={this.handleValueChange}
                        uid={item => item.value}
+                       restoreOnBackspace={item => item.label.toString()}
                        createFromSearch={(options, values, search) => {
                          this.labels = values.map(value => value.label);
                          if (search.trim().length === 0 || this.labels.indexOf(search.trim()) !== -1)
                            return null;
                          return {label: search.trim(), value: search.trim()};
+                       }}
+                       renderNoResultsFound={(values, search) => {
+                         return <div className="no-results-found">
+                           {(() => {
+                             if (search.trim().length === 0)
+                               return "Enter a new value";
+                             else if (values.map(item => item.label).indexOf(search.trim()) !== -1)
+                               return "Value already exists";
+                           })()}
+                         </div>
                        }}/>
         </div>
       </div>
