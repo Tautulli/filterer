@@ -40,8 +40,8 @@ $.fn.filterer = function(config){
   ];
 
   config.classes = {...{
-    plusIcon: 'fa fa-plus',
-    minusIcon: 'fa fa-minus',
+    plusIcon: 'fa fa-fw fa-plus',
+    minusIcon: 'fa fa-fw fa-minus',
     filterLineRow: 'form-group',
     filterLineParameter: 'col-sm-4',
     filterLineOperator: 'col-sm-3',

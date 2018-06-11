@@ -23,7 +23,7 @@ class FilterLineLabel extends Component {
     return (
       <div className={this.props.classes.filterLineLabelRow}>
         <div className={this.props.classes.filterLineLabelCondition}>
-          <h5 style={{marginTop: 0}}>Condition &#123;{this.props.index + 1}&#125;</h5>
+          <label style={{marginTop: 0}}>Condition &#123;{this.props.index + 1}&#125;</h5>
         </div>
         <div className={this.props.classes.filterLineLabelControls}>
           <a style={addRemoveStyles} onClick={this.addCondition}>
